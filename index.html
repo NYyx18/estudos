@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudos 2ª Unidade</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --primary-color: #007bff;
+            --calc-color: #28a745;
+            --ga-color: #17a2b8;
+            --ce-color: #fd7e14;
+            --light-gray: #e9ecef;
+            --dark-gray: #6c757d;
+            --border-radius: 8px;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+        h2 {
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 10px;
+            margin-top: 30px;
+            font-size: 1.8em;
+        }
+        .countdown-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .countdown-item {
+            background-color: var(--light-gray);
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+        .countdown-item .days {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: var(--light-gray);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        .progress-bar-inner {
+            height: 25px;
+            line-height: 25px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.4s ease-in-out;
+            white-space: nowrap;
+        }
+        .subject h2 {
+            color: var(--color);
+        }
+        #calc .progress-bar-inner { background-color: var(--calc-color); }
+        #ga .progress-bar-inner { background-color: var(--ga-color); }
+        #ce .progress-bar-inner { background-color: var(--ce-color); }
+        .collapsible {
+            background-color: #f7f7f7;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .collapsible:hover, .collapsible.active {
+            background-color: #e2e2e2;
+        }
+        .collapsible:after {
+            content: '\\002B';
+            color: var(--dark-gray);
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+        .collapsible.active:after {
+            content: "\\2212";
+        }
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-top: none;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        input[type="checkbox"] {
+            margin-right: 15px;
+            min-width: 18px;
+            min-height: 18px;
+            cursor: pointer;
+        }
+        label {
+            flex-grow: 1;
+            cursor: pointer;
+        }
+        label.completed {
+            text-decoration: line-through;
+            color: var(--dark-gray);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Estudos 2ª Unidade</h1>
+        <p>Seu guia interativo de progresso para as provas.</p>
+        <div class="countdown-container">
+            <div class="countdown-item">
+                <span>Cálculo 1 (04/08)</span><br>
+                <span id="countdown-calc" class="days">--</span> dias
+            </div>
+            <div class="countdown-item">
+                <span>Comp. Eletrônica (05/08)</span><br>
+                <span id="countdown-ce" class="days">--</span> dias
+            </div>
+            <div class="countdown-item">
+                <span>Geo. Analítica (08/08)</span><br>
+                <span id="countdown-ga" class="days">--</span> dias
+            </div>
+        </div>
+    </header>
+
+    <section id="overall-progress">
+        <h2>Progresso Geral</h2>
+        <div class="progress-bar">
+            <div id="progress-bar-overall" class="progress-bar-inner">0%</div>
+        </div>
+    </section>
+
+    <section id="calc" class="subject" style="--color: var(--calc-color);">
+        <h2>Cálculo 1</h2>
+        <div class="progress-bar">
+            <div id="progress-bar-calc" class="progress-bar-inner">0%</div>
+        </div>
+        
+        <button type="button" class="collapsible">Semana 1: 25/06 a 29/06</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="c1w1t1"><label for="c1w1t1">Valores máximo/mínimo, método do intervalo fechado, Teorema do Valor Médio.</label></li>
+                <li><input type="checkbox" id="c1w1t2"><label for="c1w1t2">Teste de crescimento/decrescimento, Teste da primeira derivada.</label></li>
+            </ul>
+        </div>
+        
+        <button type="button" class="collapsible">Semana 2: 30/06 a 06/07</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="c1w2t1"><label for="c1w2t1">Teste de concavidade, Teste da segunda derivada, Regra de L'Hôspital.</label></li>
+                <li><input type="checkbox" id="c1w2t2"><label for="c1w2t2">Esboço de gráfico de funções.</label></li>
+                <li><input type="checkbox" id="c1w2t3"><label for="c1w2t3">Integral definida: definição, propriedades e Teorema Fundamental do Cálculo.</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="collapsible">Semana 3: 07/07 a 13/07</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="c1w3t1"><label for="c1w3t1">Área de certas regiões do plano. Integração por substituição.</label></li>
+                <li><input type="checkbox" id="c1w3t2"><label for="c1w3t2">Integração por partes.</label></li>
+                <li><input type="checkbox" id="c1w3t3"><label for="c1w3t3">Integrais de produtos de funções trigonométricas.</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="collapsible">Semana 4: 14/07 a 20/07</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="c1w4t1"><label for="c1w4t1">Substituição trigonométrica.</label></li>
+                <li><input type="checkbox" id="c1w4t2"><label for="c1w4t2">Técnicas de integração: frações parciais.</label></li>
+                <li><input type="checkbox" id="c1w4t3"><label for="c1w4t3">Revisão de todas as técnicas de integração.</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="collapsible">Semana 5 e 6: Revisão Final (21/07 a 02/08)</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="c1w5t1"><label for="c1w5t1">Revisão focada em Derivadas (Otimização, Gráficos, L'Hôpital).</label></li>
+                <li><input type="checkbox" id="c1w5t2"><label for="c1w5t2">Revisão focada em Integrais (Cálculo de área e técnicas).</label></li>
+                <li><input type="checkbox" id="c1w5t3"><label for="c1w5t3">Resolução de provas antigas e listas de exercícios.</label></li>
+                <li><input type="checkbox" id="c1w5t4"><label for="c1w5t4">Último dia (02/08): Revisão final e tirar dúvidas.</label></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="ga" class="subject" style="--color: var(--ga-color);">
+        <h2>Geometria Analítica</h2>
+        <div class="progress-bar">
+            <div id="progress-bar-ga" class="progress-bar-inner">0%</div>
+        </div>
+
+        <button type="button" class="collapsible">Semana 1: 25/06 a 29/06</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="gaw1t1"><label for="gaw1t1">Posições relativas e interseções entre retas e planos.</label></li>
+                <li><input type="checkbox" id="gaw1t2"><label for="gaw1t2">Perpendicularidade e Ortogonalidade, Medida Angular.</label></li>
+            </ul>
+        </div>
+        
+        <button type="button" class="collapsible">Semana 2: 30/06 a 06/07</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="gaw2t1"><label for="gaw2t1">Distâncias. Introdução às Cônicas.</label></li>
+                <li><input type="checkbox" id="gaw2t2"><label for="gaw2t2">Rotação e Translação de eixos via “completar quadrados”.</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="collapsible">Semana 3: 07/07 a 13/07</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="gaw3t1"><label for="gaw3t1">Identificação e Esboço das cônicas.</label></li>
+                <li><input type="checkbox" id="gaw3t2"><label for="gaw3t2">Equação geral de segundo grau no espaço. Esferas.</label></li>
+                <li><input type="checkbox" id="gaw3t3"><label for="gaw3t3">Identificação e esboço de quádricas em posição canônica.</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="collapsible">Semana 4: 14/07 a 20/07</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="gaw4t1"><label for="gaw4t1">Superfícies regradas cilíndricas e cônicas. Superfícies de revolução.</label></li>
+                <li><input type="checkbox" id="gaw4t2"><label for="gaw4t2">Revisão geral de Cônicas e Quádricas.</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="collapsible">Semana 5 e 6: Revisão Final (21/07 a 06/08)</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="gaw5t1"><label for="gaw5t1">Revisão focada em Retas, Planos e Distâncias.</label></li>
+                <li><input type="checkbox" id="gaw5t2"><label for="gaw5t2">Revisão focada em Cônicas e Quádricas.</label></li>
+                 <li><input type="checkbox" id="gaw5t3"><label for="gaw5t3">Manutenção (31/07): Revisão rápida de fórmulas.</label></li>
+                <li><input type="checkbox" id="gaw5t4"><label for="gaw5t4">Último dia (06/08): Imersão total e revisão final.</label></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="ce" class="subject" style="--color: var(--ce-color);">
+        <h2>Computação Eletrônica</h2>
+        <div class="progress-bar">
+            <div id="progress-bar-ce" class="progress-bar-inner">0%</div>
+        </div>
+        
+        <p style="text-align:center; font-style:italic;">Lembre-se de preencher com os tópicos da sua matéria!</p>
+
+        <button type="button" class="collapsible">Semana 1 e 2</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="cew1t1"><label for="cew1t1">[Inserir Tópico 1 da matéria]</label></li>
+                <li><input type="checkbox" id="cew1t2"><label for="cew1t2">[Inserir Tópico 2 da matéria]</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="collapsible">Semana 3 e 4</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="cew2t1"><label for="cew2t1">[Inserir Tópico 3 da matéria]</label></li>
+                <li><input type="checkbox" id="cew2t2"><label for="cew2t2">[Inserir Tópico 4 da matéria]</label></li>
+            </ul>
+        </div>
+
+        <button type="button" class="collapsible">Semana 5 e 6: Revisão Final (até 03/08)</button>
+        <div class="content">
+            <ul>
+                <li><input type="checkbox" id="cew3t1"><label for="cew3t1">[Revisão Tópicos 1 e 2]</label></li>
+                <li><input type="checkbox" id="cew3t2"><label for="cew3t2">[Revisão Tópicos 3 e 4]</label></li>
+                <li><input type="checkbox" id="cew3t3"><label for="cew3t3">Resolução de exercícios e listas.</label></li>
+                <li><input type="checkbox" id="cew3t4"><label for="cew3t4">Último dia (03/08): Revisão final.</label></li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const collapsibles = document.querySelectorAll('.collapsible');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    // Logic for collapsible sections
+    collapsibles.forEach(coll => {
+        coll.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    });
+
+    // --- PROGRESS BAR AND LOCAL STORAGE LOGIC ---
+    function updateProgress() {
+        const subjectIds = ['calc', 'ga', 'ce'];
+        let totalTasks = 0;
+        let totalCompleted = 0;
+
+        subjectIds.forEach(id => {
+            const subjectSection = document.getElementById(id);
+            const subjectCheckboxes = subjectSection.querySelectorAll('input[type="checkbox"]');
+            const totalSubjectTasks = subjectCheckboxes.length;
+            let completedSubjectTasks = 0;
+
+            subjectCheckboxes.forEach(cb => {
+                if (cb.checked) {
+                    completedSubjectTasks++;
+                }
+                // Style the label
+                const label = document.querySelector(`label[for="${cb.id}"]`);
+                if (label) {
+                    label.classList.toggle('completed', cb.checked);
+                }
+            });
+
+            totalTasks += totalSubjectTasks;
+            totalCompleted += completedSubjectTasks;
+
+            const percentage = totalSubjectTasks > 0 ? (completedSubjectTasks / totalSubjectTasks) * 100 : 0;
+            const progressBar = subjectSection.querySelector('.progress-bar-inner');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = Math.round(percentage) + '%';
+        });
+
+        const overallPercentage = totalTasks > 0 ? (totalCompleted / totalTasks) * 100 : 0;
+        const overallProgressBar = document.getElementById('progress-bar-overall');
+        overallProgressBar.style.width = overallPercentage + '%';
+        overallProgressBar.textContent = Math.round(overallPercentage) + '%';
+    }
+
+    function saveProgress() {
+        const progress = {};
+        checkboxes.forEach(cb => {
+            progress[cb.id] = cb.checked;
+        });
+        localStorage.setItem('studyProgress', JSON.stringify(progress));
+    }
+
+    function loadProgress() {
+        const savedProgress = JSON.parse(localStorage.getItem('studyProgress'));
+        if (savedProgress) {
+            checkboxes.forEach(cb => {
+                cb.checked = savedProgress[cb.id] || false;
+            });
+        }
+    }
+    
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+            saveProgress();
+            updateProgress();
+        });
+    });
+
+    // --- COUNTDOWN LOGIC ---
+    function updateCountdown() {
+        const now = new Date();
+        const examDates = {
+            calc: new Date('2025-08-04T00:00:00'),
+            ce: new Date('2025-08-05T00:00:00'),
+            ga: new Date('2025-08-08T00:00:00')
+        };
+
+        for (const key in examDates) {
+            const diffTime = examDates[key] - now;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const element = document.getElementById(`countdown-${key}`);
+            if (element) {
+                element.textContent = diffDays > 0 ? diffDays : 'Boa Prova!';
+            }
+        }
+    }
+
+    // Initial load
+    loadProgress();
+    updateProgress();
+    updateCountdown();
+    setInterval(updateCountdown, 60000); // Update countdown every minute
+});
+</script>
+
+</body>
+</html>
