@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudos 2ª Unidade</title>
+    <title>Estudos 2ª Unidade (Novo Cronograma)</title>
     <style>
         :root {
             --bg-color: #f0f2f5;
@@ -110,6 +110,13 @@
         .collapsible:hover, .collapsible.active {
             background-color: #e2e2e2;
         }
+        .collapsible.weekend-study {
+            background-color: #fffbe6 !important;
+            border-left: 5px solid #ffeeba;
+        }
+        .collapsible.weekend-study.active, .collapsible.weekend-study:hover {
+             background-color: #fff3cd !important;
+        }
         .collapsible:after {
             content: '\\002B';
             color: var(--dark-gray);
@@ -135,13 +142,16 @@
             margin: 15px 0;
         }
         li {
-            padding: 10px;
+            padding: 12px;
             border-bottom: 1px solid #f0f0f0;
             display: flex;
             align-items: center;
         }
         li:last-child {
             border-bottom: none;
+        }
+        li.weekend-task {
+            background-color: #fffbe6;
         }
         input[type="checkbox"] {
             margin-right: 15px;
@@ -164,7 +174,7 @@
 <div class="container">
     <header>
         <h1>Estudos 2ª Unidade</h1>
-        <p>Seu guia interativo de progresso para as provas.</p>
+        <p>Seu guia interativo de progresso para as provas (Cronograma com fins de semana livres).</p>
         <div class="countdown-container">
             <div class="countdown-item">
                 <span>Cálculo 1 (04/08)</span><br>
@@ -194,48 +204,34 @@
             <div id="progress-bar-calc" class="progress-bar-inner">0%</div>
         </div>
         
-        <button type="button" class="collapsible">Semana 1: 25/06 a 29/06</button>
+        <button type="button" class="collapsible">Semanas 1 e 2 (25/06 a 06/07)</button>
         <div class="content">
             <ul>
-                <li><input type="checkbox" id="c1w1t1"><label for="c1w1t1">Valores máximo/mínimo, método do intervalo fechado, Teorema do Valor Médio.</label></li>
-                <li><input type="checkbox" id="c1w1t2"><label for="c1w1t2">Teste de crescimento/decrescimento, Teste da primeira derivada.</label></li>
+                <li><input type="checkbox" id="nc1w1t1"><label for="nc1w1t1">Valores máx/mín, método do intervalo fechado, T.V.M.</label></li>
+                <li><input type="checkbox" id="nc1w2t1"><label for="nc1w2t1">Teste de crescimento/decrescimento, Teste da 1ª derivada.</label></li>
+                <li><input type="checkbox" id="nc1w2t2"><label for="nc1w2t2">Teste de concavidade, Teste da 2ª derivada.</label></li>
             </ul>
         </div>
         
-        <button type="button" class="collapsible">Semana 2: 30/06 a 06/07</button>
+        <button type="button" class="collapsible">Semanas 3 e 4 (07/07 a 20/07)</button>
         <div class="content">
             <ul>
-                <li><input type="checkbox" id="c1w2t1"><label for="c1w2t1">Teste de concavidade, Teste da segunda derivada, Regra de L'Hôspital.</label></li>
-                <li><input type="checkbox" id="c1w2t2"><label for="c1w2t2">Esboço de gráfico de funções.</label></li>
-                <li><input type="checkbox" id="c1w2t3"><label for="c1w2t3">Integral definida: definição, propriedades e Teorema Fundamental do Cálculo.</label></li>
+                <li><input type="checkbox" id="nc1w3t1"><label for="nc1w3t1">Regra de L'Hôspital e Esboço de gráfico.</label></li>
+                <li><input type="checkbox" id="nc1w3t2"><label for="nc1w3t2">Integral definida, propriedades e T.F.C.</label></li>
+                <li><input type="checkbox" id="nc1w4t1"><label for="nc1w4t1">Área, Integração por substituição e por partes.</label></li>
+                <li><input type="checkbox" id="nc1w4t2"><label for="nc1w4t2">Integrais trigonométricas e Substituição trigonométrica.</label></li>
+                <li><input type="checkbox" id="nc1w4t3"><label for="nc1w4t3">Integração por frações parciais. Fim do conteúdo.</label></li>
             </ul>
         </div>
-
-        <button type="button" class="collapsible">Semana 3: 07/07 a 13/07</button>
+        
+        <button type="button" class="collapsible weekend-study">Semanas 5 e 6: Revisão Final (21/07 a 03/08)</button>
         <div class="content">
-            <ul>
-                <li><input type="checkbox" id="c1w3t1"><label for="c1w3t1">Área de certas regiões do plano. Integração por substituição.</label></li>
-                <li><input type="checkbox" id="c1w3t2"><label for="c1w3t2">Integração por partes.</label></li>
-                <li><input type="checkbox" id="c1w3t3"><label for="c1w3t3">Integrais de produtos de funções trigonométricas.</label></li>
-            </ul>
-        </div>
-
-        <button type="button" class="collapsible">Semana 4: 14/07 a 20/07</button>
-        <div class="content">
-            <ul>
-                <li><input type="checkbox" id="c1w4t1"><label for="c1w4t1">Substituição trigonométrica.</label></li>
-                <li><input type="checkbox" id="c1w4t2"><label for="c1w4t2">Técnicas de integração: frações parciais.</label></li>
-                <li><input type="checkbox" id="c1w4t3"><label for="c1w4t3">Revisão de todas as técnicas de integração.</label></li>
-            </ul>
-        </div>
-
-        <button type="button" class="collapsible">Semana 5 e 6: Revisão Final (21/07 a 02/08)</button>
-        <div class="content">
-            <ul>
-                <li><input type="checkbox" id="c1w5t1"><label for="c1w5t1">Revisão focada em Derivadas (Otimização, Gráficos, L'Hôpital).</label></li>
-                <li><input type="checkbox" id="c1w5t2"><label for="c1w5t2">Revisão focada em Integrais (Cálculo de área e técnicas).</label></li>
-                <li><input type="checkbox" id="c1w5t3"><label for="c1w5t3">Resolução de provas antigas e listas de exercícios.</label></li>
-                <li><input type="checkbox" id="c1w5t4"><label for="c1w5t4">Último dia (02/08): Revisão final e tirar dúvidas.</label></li>
+             <ul>
+                <li><input type="checkbox" id="nc1w5t1"><label for="nc1w5t1">Revisão: Exercícios de Derivadas (Otimização, Gráficos).</label></li>
+                <li><input type="checkbox" id="nc1w5t2"><label for="nc1w5t2">Revisão: Exercícios de Integrais (Áreas e Técnicas).</label></li>
+                <li class="weekend-task"><input type="checkbox" id="nc1w5t3"><label for="nc1w5t3">DOMINGO (27/07): Resolver prova antiga ou lista completa.</label></li>
+                <li><input type="checkbox" id="nc1w6t1"><label for="nc1w6t1">Revisão: Foco total nos tópicos de maior dificuldade.</label></li>
+                <li class="weekend-task"><input type="checkbox" id="nc1w6t2"><label for="nc1w6t2">SÁBADO (02/08): ÚLTIMO DIA - Revisão final e exercícios chave.</label></li>
             </ul>
         </div>
     </section>
@@ -246,50 +242,37 @@
             <div id="progress-bar-ga" class="progress-bar-inner">0%</div>
         </div>
 
-        <button type="button" class="collapsible">Semana 1: 25/06 a 29/06</button>
+        <button type="button" class="collapsible">Semanas 1 e 2 (25/06 a 06/07)</button>
         <div class="content">
             <ul>
-                <li><input type="checkbox" id="gaw1t1"><label for="gaw1t1">Posições relativas e interseções entre retas e planos.</label></li>
-                <li><input type="checkbox" id="gaw1t2"><label for="gaw1t2">Perpendicularidade e Ortogonalidade, Medida Angular.</label></li>
+                <li><input type="checkbox" id="ngaw1t1"><label for="ngaw1t1">Posições relativas e interseções entre retas e planos.</label></li>
+                <li><input type="checkbox" id="ngaw2t1"><label for="ngaw2t1">Perpendicularidade, Ortogonalidade, Medida Angular.</label></li>
+                <li><input type="checkbox" id="ngaw2t2"><label for="ngaw2t2">Distâncias. Introdução às Cônicas.</label></li>
             </ul>
         </div>
         
-        <button type="button" class="collapsible">Semana 2: 30/06 a 06/07</button>
+        <button type="button" class="collapsible">Semanas 3 e 4 (07/07 a 20/07)</button>
         <div class="content">
             <ul>
-                <li><input type="checkbox" id="gaw2t1"><label for="gaw2t1">Distâncias. Introdução às Cônicas.</label></li>
-                <li><input type="checkbox" id="gaw2t2"><label for="gaw2t2">Rotação e Translação de eixos via “completar quadrados”.</label></li>
+                <li><input type="checkbox" id="ngaw3t1"><label for="ngaw3t1">Rotação e Translação de eixos via “completar quadrados”.</label></li>
+                <li><input type="checkbox" id="ngaw3t2"><label for="ngaw3t2">Identificação e Esboço das cônicas.</label></li>
+                <li><input type="checkbox" id="ngaw4t1"><label for="ngaw4t1">Eq. geral do 2º grau no espaço. Esferas. Quádricas.</label></li>
+                <li><input type="checkbox" id="ngaw4t2"><label for="ngaw4t2">Superfícies regradas, cilíndricas e cônicas. Revisão 3D.</label></li>
             </ul>
         </div>
-
-        <button type="button" class="collapsible">Semana 3: 07/07 a 13/07</button>
+        
+        <button type="button" class="collapsible weekend-study">Semanas 5 e 6: Revisão Final (21/07 a 06/08)</button>
         <div class="content">
-            <ul>
-                <li><input type="checkbox" id="gaw3t1"><label for="gaw3t1">Identificação e Esboço das cônicas.</label></li>
-                <li><input type="checkbox" id="gaw3t2"><label for="gaw3t2">Equação geral de segundo grau no espaço. Esferas.</label></li>
-                <li><input type="checkbox" id="gaw3t3"><label for="gaw3t3">Identificação e esboço de quádricas em posição canônica.</label></li>
-            </ul>
-        </div>
-
-        <button type="button" class="collapsible">Semana 4: 14/07 a 20/07</button>
-        <div class="content">
-            <ul>
-                <li><input type="checkbox" id="gaw4t1"><label for="gaw4t1">Superfícies regradas cilíndricas e cônicas. Superfícies de revolução.</label></li>
-                <li><input type="checkbox" id="gaw4t2"><label for="gaw4t2">Revisão geral de Cônicas e Quádricas.</label></li>
-            </ul>
-        </div>
-
-        <button type="button" class="collapsible">Semana 5 e 6: Revisão Final (21/07 a 06/08)</button>
-        <div class="content">
-            <ul>
-                <li><input type="checkbox" id="gaw5t1"><label for="gaw5t1">Revisão focada em Retas, Planos e Distâncias.</label></li>
-                <li><input type="checkbox" id="gaw5t2"><label for="gaw5t2">Revisão focada em Cônicas e Quádricas.</label></li>
-                 <li><input type="checkbox" id="gaw5t3"><label for="gaw5t3">Manutenção (31/07): Revisão rápida de fórmulas.</label></li>
-                <li><input type="checkbox" id="gaw5t4"><label for="gaw5t4">Último dia (06/08): Imersão total e revisão final.</label></li>
+             <ul>
+                <li><input type="checkbox" id="ngaw5t1"><label for="ngaw5t1">Revisão: Exercícios de Retas, Planos e Distâncias.</label></li>
+                <li><input type="checkbox" id="ngaw5t2"><label for="ngaw5t2">Revisão: Exercícios de Cônicas e Quádricas.</label></li>
+                <li><input type="checkbox" id="ngaw6t1"><label for="ngaw6t1">Revisão: Foco nos pontos fracos identificados.</label></li>
+                <li><input type="checkbox" id="ngaw6t2"><label for="ngaw6t2">Revisão (Manutenção 31/07): Revisão rápida de fórmulas.</label></li>
+                <li><input type="checkbox" id="ngaw7t1"><label for="ngaw7t1">QUARTA (06/08): ÚLTIMO DIA - Imersão e revisão final.</label></li>
             </ul>
         </div>
     </section>
-
+    
     <section id="ce" class="subject" style="--color: var(--ce-color);">
         <h2>Computação Eletrônica</h2>
         <div class="progress-bar">
@@ -298,29 +281,23 @@
         
         <p style="text-align:center; font-style:italic;">Lembre-se de preencher com os tópicos da sua matéria!</p>
 
-        <button type="button" class="collapsible">Semana 1 e 2</button>
+        <button type="button" class="collapsible">Semanas 1 a 4 (até 23/07)</button>
         <div class="content">
             <ul>
-                <li><input type="checkbox" id="cew1t1"><label for="cew1t1">[Inserir Tópico 1 da matéria]</label></li>
-                <li><input type="checkbox" id="cew1t2"><label for="cew1t2">[Inserir Tópico 2 da matéria]</label></li>
+                <li><input type="checkbox" id="ncew1t1"><label for="ncew1t1">[Inserir Tópico 1 da matéria]</label></li>
+                <li><input type="checkbox" id="ncew2t1"><label for="ncew2t1">[Inserir Tópico 2 da matéria]</label></li>
+                <li><input type="checkbox" id="ncew3t1"><label for="ncew3t1">[Inserir Tópico 3 da matéria]</label></li>
+                <li><input type="checkbox" id="ncew4t1"><label for="ncew4t1">[Inserir Tópico 4 ou Revisão]</label></li>
             </ul>
         </div>
 
-        <button type="button" class="collapsible">Semana 3 e 4</button>
+        <button type="button" class="collapsible weekend-study">Semanas 5 e 6: Revisão Final (26/07 a 03/08)</button>
         <div class="content">
             <ul>
-                <li><input type="checkbox" id="cew2t1"><label for="cew2t1">[Inserir Tópico 3 da matéria]</label></li>
-                <li><input type="checkbox" id="cew2t2"><label for="cew2t2">[Inserir Tópico 4 da matéria]</label></li>
-            </ul>
-        </div>
-
-        <button type="button" class="collapsible">Semana 5 e 6: Revisão Final (até 03/08)</button>
-        <div class="content">
-            <ul>
-                <li><input type="checkbox" id="cew3t1"><label for="cew3t1">[Revisão Tópicos 1 e 2]</label></li>
-                <li><input type="checkbox" id="cew3t2"><label for="cew3t2">[Revisão Tópicos 3 e 4]</label></li>
-                <li><input type="checkbox" id="cew3t3"><label for="cew3t3">Resolução de exercícios e listas.</label></li>
-                <li><input type="checkbox" id="cew3t4"><label for="cew3t4">Último dia (03/08): Revisão final.</label></li>
+                <li class="weekend-task"><input type="checkbox" id="ncew5t1"><label for="ncew5t1">SÁBADO (26/07): Revisão intensiva dos Tópicos 1 e 2.</label></li>
+                <li><input type="checkbox" id="ncew6t1"><label for="ncew6t1">Revisão intensiva dos Tópicos 3 e 4.</label></li>
+                <li><input type="checkbox" id="ncew6t2"><label for="ncew6t2">Últimos exercícios e revisão geral da matéria.</label></li>
+                <li class="weekend-task"><input type="checkbox" id="ncew6t3"><label for="ncew6t3">DOMINGO (03/08): ÚLTIMO DIA - Revisão final e leve.</label></li>
             </ul>
         </div>
     </section>
@@ -361,7 +338,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (cb.checked) {
                     completedSubjectTasks++;
                 }
-                // Style the label
                 const label = document.querySelector(`label[for="${cb.id}"]`);
                 if (label) {
                     label.classList.toggle('completed', cb.checked);
@@ -388,11 +364,11 @@ document.addEventListener('DOMContentLoaded', function() {
         checkboxes.forEach(cb => {
             progress[cb.id] = cb.checked;
         });
-        localStorage.setItem('studyProgress', JSON.stringify(progress));
+        localStorage.setItem('studyProgressNew', JSON.stringify(progress));
     }
 
     function loadProgress() {
-        const savedProgress = JSON.parse(localStorage.getItem('studyProgress'));
+        const savedProgress = JSON.parse(localStorage.getItem('studyProgressNew'));
         if (savedProgress) {
             checkboxes.forEach(cb => {
                 cb.checked = savedProgress[cb.id] || false;
@@ -421,7 +397,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             const element = document.getElementById(`countdown-${key}`);
             if (element) {
-                element.textContent = diffDays > 0 ? diffDays : 'Boa Prova!';
+                 if (diffDays > 0) {
+                    element.textContent = diffDays;
+                } else if (diffDays === 0) {
+                    element.textContent = 'É hoje!';
+                }
+                else {
+                    element.textContent = 'Finalizado!';
+                }
             }
         }
     }
@@ -430,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadProgress();
     updateProgress();
     updateCountdown();
-    setInterval(updateCountdown, 60000); // Update countdown every minute
+    setInterval(updateCountdown, 60000); 
 });
 </script>
 
